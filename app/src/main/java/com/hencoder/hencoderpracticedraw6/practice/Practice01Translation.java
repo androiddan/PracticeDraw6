@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import static com.hencoder.hencoderpracticedraw6.Utils.dpToPixel;
 public class Practice01Translation extends RelativeLayout {
     Button animateBt;
     ImageView imageView;
+    int index;
 
     public Practice01Translation(Context context) {
         super(context);
@@ -41,14 +43,50 @@ public class Practice01Translation extends RelativeLayout {
         animateBt = (Button) findViewById(R.id.animateBt);
         imageView = (ImageView) findViewById(R.id.imageView);
         if (SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            // 给音乐图标加上合适的阴影
+            // 给音乐图标加上合适的阴影,当进行Z轴的移动是才能看到，否则Z轴平移无效果
             imageView.setOutlineProvider(new MusicOutlineProvider());
         }
 
         animateBt.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                int remainder = index % 6;
+                Log.e("TAG", "onClick: =========="+remainder);
+                switch (remainder) {
+                    case 0:
+                        imageView.animate()
+                                .translationX(500)
+                                .setDuration(500);
+                        break;
+                    case 1:
+                        imageView.animate()
+                                .translationX(0)
+                                .setDuration(500);
+                        break;
+                    case 2:
+                        imageView.animate()
+                                .translationY(200)
+                                .setDuration(500);
+                        break;
+                    case 3:
+                        imageView.animate()
+                                .translationY(0)
+                                .setDuration(500);
+                        break;
+                    case 4:
+                        imageView.animate()
+                                .translationZ(200)
+                                .setDuration(500);
+                        break;
+                    case 5:
+                        imageView.animate()
+                                .translationZ(0)
+                                .setDuration(500);
+                        break;
+                }
+                index++;
             }
         });
     }

@@ -1,8 +1,14 @@
 package com.hencoder.hencoderpracticedraw6.practice.practice08;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -38,6 +44,26 @@ public class Practice08ObjectAnimatorLayout extends RelativeLayout {
                 // 1. 用 ObjectAnimator 创建 Animator 对象
                 // 2. 用 start() 执行动画
                 // *. 记得在 Practice08ObjectAnimatorView 中为 progress 添加 setter/ getter 方法！
+
+                ObjectAnimator animator = ObjectAnimator.ofFloat(view, "progress", 0, 80);
+                animator.setDuration(500)
+                        .setInterpolator(new BounceInterpolator());
+//                        .setInterpolator(new FastOutLinearInInterpolator());
+                animator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        Log.e("TAG", "onAnimationEnd: ============");
+                    }
+
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        Log.e("TAG", "onAnimationStart: ============");
+
+                    }
+                });
+                animator.start();
             }
         });
     }

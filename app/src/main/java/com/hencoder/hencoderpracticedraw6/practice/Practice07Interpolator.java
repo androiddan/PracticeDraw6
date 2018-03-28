@@ -56,19 +56,19 @@ public class Practice07Interpolator extends LinearLayout {
         interpolatorPath.lineTo(0.25f, 0.25f);
         interpolatorPath.moveTo(0.25f, 1.5f);
         interpolatorPath.lineTo(1, 1);
-        interpolators[0] = new AccelerateDecelerateInterpolator();
-        interpolators[1] = new LinearInterpolator();
-        interpolators[2] = new AccelerateInterpolator();
-        interpolators[3] = new DecelerateInterpolator();
-        interpolators[4] = new AnticipateInterpolator();
-        interpolators[5] = new OvershootInterpolator();
-        interpolators[6] = new AnticipateOvershootInterpolator();
-        interpolators[7] = new BounceInterpolator();
-        interpolators[8] = new CycleInterpolator(0.5f);
-        interpolators[9] = PathInterpolatorCompat.create(interpolatorPath);
-        interpolators[10] = new FastOutLinearInInterpolator();
-        interpolators[11] = new FastOutSlowInInterpolator();
-        interpolators[12] = new LinearOutSlowInInterpolator();
+        interpolators[0] = new AccelerateDecelerateInterpolator();//加速减速
+        interpolators[1] = new LinearInterpolator();//匀速
+        interpolators[2] = new AccelerateInterpolator();//持续加速
+        interpolators[3] = new DecelerateInterpolator();//持续减速 -> 0
+        interpolators[4] = new AnticipateInterpolator();//回拉 - 加速 - 减速
+        interpolators[5] = new OvershootInterpolator();//加速 - 减速 - 弹回
+        interpolators[6] = new AnticipateOvershootInterpolator();//回拉 - 加速 - 减速 - 弹回
+        interpolators[7] = new BounceInterpolator();//加速 - 减速 - 弹回 - 最终位置
+        interpolators[8] = new CycleInterpolator(0.5f);// 加速 - 减速 - 返回原位置
+        interpolators[9] = PathInterpolatorCompat.create(interpolatorPath); // 通过path 自定义插值器
+        interpolators[10] = new FastOutLinearInInterpolator();// 类似 ‘持续加速’初始速度略微快一点
+        interpolators[11] = new FastOutSlowInInterpolator();// 类似 ‘加速减速’初始速度快很多，动画效果有‘着急’感
+        interpolators[12] = new LinearOutSlowInInterpolator();// 类似‘持续减速’ 两者动画表现上 区别不大
     }
 
     @Override
